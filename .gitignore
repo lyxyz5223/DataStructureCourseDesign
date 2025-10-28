@@ -1,0 +1,30 @@
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases
+!.yarn/sdks
+!.yarn/versions
+
+# Whether you use PnP or not, the node_modules folder is often used to store
+# build artifacts that should be gitignored
+node_modules
+
+# Swap the comments on the following lines if you wish to use zero-installs
+# In that case, don't forget to run `yarn config set enableGlobalCache false`!
+# Documentation here: https://yarnpkg.com/features/caching#zero-installs
+
+#!.yarn/cache
+.pnp.*
+
+
+# 忽略任意层级名为 Debug 的目录
+# 规则说明：
+# - 当使用 `/Debug/` 时，表示仓库根目录下的 Debug 文件夹；
+# - 使用 `**/Debug/` 可以匹配任意子目录中的 Debug 文件夹。
+
+# 忽略所有名为 Debug 的目录（跨子目录）
+**/Debug/
+
+**/debug.log
+
+**/.VSCodeCounter/

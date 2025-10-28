@@ -1,0 +1,266 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "cppbuild",
+            "label": "g++ build debug",
+            "command": "D:/Softwares/mingw64/bin/g++.exe",
+            "args": [
+                "-static",
+                "-fdiagnostics-color=always",
+                //C++17
+                "-std=c++23",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\Debug\\${fileBasenameNoExtension}.exe",
+                "-fexec-charset=GBK",
+                // "-finput-charset=UTF-8"
+            ],
+            "options": {
+                "cwd": "D:/Softwares/mingw64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "编译器: D:/Softwares/mingw64/bin/g++.exe"
+        },
+        {
+            "type": "cppbuild",
+            "label": "gcc build debug",
+            "command": "D:/Softwares/mingw64/bin/gcc.exe",
+            "args": [
+                "-static",
+                "-fdiagnostics-color=always",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}\\Debug\\${fileBasenameNoExtension}.exe",
+                // "-fexec-charset=GBK",
+                // "-finput-charset=UTF-8"
+            ],
+            "options": {
+                "cwd": "D:/Softwares/mingw64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "编译器: D:/Softwares/mingw64/bin/gcc.exe"
+        },
+        {
+            "type": "cppbuild",
+            "label": "msvc build release",
+            "command": "D:/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/bin/Hostx64/x64/cl.exe",
+            "args": [
+                "/permissive-",
+                "/MP",
+                "/ifcOutput", "${fileDirname}/${fileBasenameNoExtension}/x64/Release/",
+                "/GS",
+                "/GL",
+                "/W3",
+                "/Gy",
+                "/Zc:wchar_t",
+                // "/I", "D:\\C++\\PyWallpaper\\",
+                // "/I", "D:\\Qt\\6.7.2\\msvc2019_64\\include",
+                // "/I", "D:\\Qt\\6.7.2\\msvc2019_64\\include\\QtOpenGLWidgets",
+                // "/I", "D:\\Qt\\6.7.2\\msvc2019_64\\include\\QtWidgets",
+                // "/I", "D:\\Qt\\6.7.2\\msvc2019_64\\include\\QtOpenGL",
+                // "/I", "D:\\Qt\\6.7.2\\msvc2019_64\\include\\QtSvg",
+                // "/I", "D:\\Qt\\6.7.2\\msvc2019_64\\include\\QtGui",
+                // "/I", "D:\\Qt\\6.7.2\\msvc2019_64\\include\\QtCore",
+                // "/I", "D:\\Qt\\6.7.2\\msvc2019_64\\mkspecs\\win32-msvc",
+                // "/I", "PyWallpaper\\x64\\Debug\\moc",
+                // "/I", "PyWallpaper\\x64\\Debug\\uic",
+                "/Zi",
+                "/Gm-",
+                "/O2",
+                "/sdl",
+                "/Fd${fileDirname}/${fileBasenameNoExtension}/x64/Release/vc143.pdb",
+                "/Zc:inline",
+                "/fp:precise",
+                "/D", "_WINDOWS",
+                "/D", "UNICODE",
+                "/D", "_UNICODE",
+                "/D", "WIN32",
+                "/D", "_ENABLE_EXTENDED_ALIGNED_STORAGE",
+                "/D", "WIN64",
+                // "/D", "QT_OPENGLWIDGETS_LIB",
+                // "/D", "QT_WIDGETS_LIB",
+                // "/D", "QT_OPENGL_LIB",
+                // "/D", "QT_SVG_LIB",
+                // "/D", "QT_GUI_LIB",
+                // "/D", "QT_CORE_LIB",
+                "/errorReport:prompt",
+                "/WX-",
+                "/Zc:forScope",
+                "/Gd",
+                "/Oi",
+                "/MDd",
+                "/std:c++latest",
+                "/FC",
+                "/Fa${fileDirname}/${fileBasenameNoExtension}/x64/Release/",
+                "/EHsc",
+                "/nologo",
+                "/Fo${fileDirname}/${fileBasenameNoExtension}/x64/Release/",
+                "/Fp${fileDirname}/${fileBasenameNoExtension}/x64/Release/${fileBasenameNoExtension}.pch",
+                "/diagnostics:column",
+                "/Fe:${fileDirname}/${fileBasenameNoExtension}/x64/Release/${fileBasenameNoExtension}.exe",
+                "${file}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "调试器生成的任务。"
+        },
+        {
+            "type": "shell",
+            "label": "msvc build debug",
+            "command": "cmd",
+            "args": [
+                "/C",
+                "chcp 65001 && call \"D:/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvars64.bat\" && cl.exe /permissive- /Zi /EHsc /Fe:${fileDirname}\\Debug\\msvc\\${fileBasenameNoExtension}.exe ${file} /D _WINDOWS /D UNICODE /D _UNICODE /D WIN32 /D _ENABLE_EXTENDED_ALIGNED_STORAGE /D WIN64 /Zc:wchar_t /MDd /std:c++latest /Fo${fileDirname}\\Debug\\msvc\\ /Fd${fileDirname}\\Debug\\msvc\\${fileBasenameNoExtension}.pdb /diagnostics:column /utf-8 /Od ",
+                // "call \"D:/Microsoft Visual Studio/2022/Community/VC/Auxiliary/Build/vcvars64.bat\" && cl.exe",
+                // "/permissive-",
+                // "/Zi",
+                // "/EHsc",
+                // "/Fe:${fileDirname}\\Debug\\msvc\\${fileBasenameNoExtension}.exe",
+                // "${file}",
+                // "/D", "_WINDOWS",
+                // "/D", "UNICODE",
+                // "/D", "_UNICODE",
+                // "/D", "WIN32",
+                // "/D", "_ENABLE_EXTENDED_ALIGNED_STORAGE",
+                // "/D", "WIN64",
+                // "/Zc:wchar_t",
+                // "/MDd",
+                // "/std:c++latest",
+                // "/FC",
+                // "/Fo${fileDirname}\\Debug\\msvc\\",
+                // "/diagnostics:column"
+            ],
+            "options": {
+                "cwd": "${fileDirname}",
+                "shell": {
+                    "executable": "cmd.exe"
+                }
+            },
+            "problemMatcher": [
+                "$msCompile"
+            ],
+            "group": "build",
+            "detail": "编译器: D:/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.40.33807/bin/Hostx64/x64/cl.exe"
+        },
+        {
+            "type": "cppbuild",
+            "label": "Task 1",
+            "command": "D:/Softwares/mingw64/bin/gcc.exe",
+            "args": [
+                "-static",
+                "-fdiagnostics-color=always",
+                "-g",
+                "${fileDirname}/Universal/Array/Array.c",
+                "${fileDirname}/Universal/Linklist/Linklist.c",
+                "${fileDirname}/Universal/Set/Set.c",
+                "${fileDirname}/Universal/Set/ArraySet.c",
+                "${fileDirname}/Universal/Set/LinklistSet.c",
+                "${file}",
+                "-o",
+                "${fileDirname}\\Debug\\${fileBasenameNoExtension}.exe",
+                // "-fexec-charset=GBK",
+                // "-finput-charset=UTF-8"
+            ],
+            "options": {
+                "cwd": "D:/Softwares/mingw64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "编译器: D:/Softwares/mingw64/bin/gcc.exe"
+        },
+        {
+            "type": "cppbuild",
+            "label": "Task 2",
+            "command": "D:/Softwares/mingw64/bin/gcc.exe",
+            "args": [
+                "-static",
+                "-fdiagnostics-color=always",
+                "-g", // Debug 符号信息
+                "${fileDirname}/Universal/Array/Array.c",
+                "${fileDirname}/Universal/Linklist/Linklist.c",
+                "${fileDirname}/Universal/Set/Set.c",
+                "${fileDirname}/Universal/Set/ArraySet.c",
+                "${fileDirname}/Universal/Set/LinklistSet.c",
+                "${fileDirname}/Universal/String/CharArray.c",
+                "${fileDirname}/Universal/String/String.c",
+                "${fileDirname}/FileSystem.c",
+                "${fileDirname}/TextFormatting.c",
+                "${file}",
+                "-o",
+                "${fileDirname}\\Debug\\${fileBasenameNoExtension}.exe",
+                // "-fexec-charset=GBK",
+                // "-finput-charset=UTF-8"
+                // "-lwinmm",
+            ],
+            "options": {
+                "cwd": "D:/Softwares/mingw64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "编译器: D:/Softwares/mingw64/bin/gcc.exe"
+        },
+        {
+            "type": "cppbuild",
+            "label": "Task 3",
+            "command": "D:/Softwares/mingw64/bin/gcc.exe",
+            "args": [
+                "-std=c11", // C语言标准
+                "-static",
+                "-fdiagnostics-color=always",
+                "-g",
+                // "-I${fileDirname}/Universal",
+                "-D_DEBUG", // 定义预处理器宏
+                "${fileDirname}/Universal/Array/Array.c",
+                "${fileDirname}/Universal/Linklist/Linklist.c",
+                "${fileDirname}/Universal/Set/Set.c",
+                "${fileDirname}/Universal/Set/ArraySet.c",
+                "${fileDirname}/Universal/Set/LinklistSet.c",
+                "${fileDirname}/Universal/String/CharArray.c",
+                "${fileDirname}/Universal/String/String.c",
+                "${fileDirname}/Universal/FileSystem/FileSystem.c",
+                "${fileDirname}/Universal/FileSplitting/FileSplitting.c",
+                "${fileDirname}/Universal/Queue/Queue.c",
+                "${fileDirname}/Universal/ThreadPool/ThreadPool.c",
+                "${fileDirname}/Universal/MemoryMap/MemoryMap.c",
+                "${fileDirname}/Universal/FileSort/FileSort.c",
+                "${fileDirname}/Universal/LoserTree/LoserTree.c",
+                "${file}",
+                "-o",
+                "${fileDirname}\\Debug\\${fileBasenameNoExtension}.exe",
+                "-pthread", // 链接pthread库
+                // "-fexec-charset=GBK",
+                // "-finput-charset=UTF-8"
+            ],
+            "options": {
+                "cwd": "D:/Softwares/mingw64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "编译器: D:/Softwares/mingw64/bin/gcc.exe"
+        }
+
+    ]
+}
