@@ -202,7 +202,7 @@
                 "${fileDirname}/Universal/Set/LinklistSet.c",
                 "${fileDirname}/Universal/String/CharArray.c",
                 "${fileDirname}/Universal/String/String.c",
-                "${fileDirname}/FileSystem.c",
+                "${fileDirname}/Universal/FileSystem/FileSystem.c",
                 "${fileDirname}/TextFormatting.c",
                 "${file}",
                 "-o",
