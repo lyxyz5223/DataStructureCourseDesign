@@ -156,11 +156,17 @@ int main()
   MemoryMap_Unmap(&mm);
   MemoryMap_Close(&mm);
 
+
+  // 多线程分割文件
+  // const ull MAX_PART_SIZE = 100 * 1024 * 1024; // 每个小文件最大100MB
+  const ull MAX_PART_SIZE = 128; // 每个小文件最大128字节
+  const int THREAD_COUNT = 8; // 多线程
+  const int PART_START_INDEX = 1; // 分割文件起始索引
+
   // 可有可无，这里仅仅用于提供信息给用户
-  {  // 利用大文件大小计算分割数量
-    const ull MAX_PART_SIZE = 100 * 1024 * 1024; // 每个小文件最大100MB
-    ull partCount = fileSize / MAX_PART_SIZE; // 计算整除部分
-    if (fileSize % MAX_PART_SIZE != 0) // 有余数则需要多一个文件
+  {                                              // 利用大文件大小计算分割数量
+    ull partCount = fileSize / MAX_PART_SIZE;    // 计算整除部分
+    if (fileSize % MAX_PART_SIZE != 0)           // 有余数则需要多一个文件
       partCount++;
     // 计算每个小文件的大小，直接均分
     ull splittedFileSize = fileSize / partCount;
@@ -175,10 +181,7 @@ int main()
       return 7;
     }
   }
-  // 多线程分割文件
-  const ull MAX_PART_SIZE = 100 * 1024 * 1024; // 每个小文件最大100MB
-  const int THREAD_COUNT = 8; // 多线程
-  const int PART_START_INDEX = 1; // 分割文件起始索引
+
   String outputFilePrefix = String_Create("part_", 0, 1);
   String outputFileExtension = String_Create(".txt", 0, 1);
   FileSplitting_SplitSync(fs, tempDir, outputFilePrefix, outputFileExtension, PART_START_INDEX, MAX_PART_SIZE, THREAD_COUNT);
@@ -233,6 +236,8 @@ int main()
   ull len = arrApi->length(arrSmallFilePathsPtr);
   ull bufferSize = 16 * 1024 * 1024; // 4MB缓冲区
   ull availableMemory = MAX_PART_SIZE * 3;
+  if (bufferSize * 2 > availableMemory)
+    bufferSize = availableMemory / 2 / 2 * 0.8;
   // ull bufferSize = 1024; // 1KB缓冲区
   // ull availableMemory = 4 * 1024;
   MergeSortedFiles(paths, len, outputFilePath, tempDirKWay, availableMemory, bufferSize, MergeSortedFilesComparator);
@@ -256,5 +261,23 @@ int main()
   printf("文件排序任务完成! 耗时: %.2f 秒\n", duration);
   // TODO: 删除：输出统计数据------------------------------------------
   printf("实际需要排序的元素数: %llu", elemCount);
+  // TODO: 删除：读取输出的结果文件用于统计---------------------------
+  ull outputElemCount = 0;
+  FileSystem outputFs = fsApi->create(strApi->toCString(outputFilePath), "r");
+  if (outputFs)
+  {
+    char buffer[1024];
+    ull readCount = 0;
+    while ((readCount = outputFs->functions->read(outputFs, buffer, sizeof(char), 1024)) > 0)
+    {
+      for (ull i = 0; i < readCount; i++)
+      {
+        if (buffer[i] == '\n')
+          outputElemCount++;
+      }
+    }
+    outputFs->functions->close(outputFs);
+    printf(", 输出结果文件中的元素数: %llu\n", outputElemCount);
+  }
   return 0;
 }

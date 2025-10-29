@@ -4,6 +4,7 @@
 #include "../String/String.h"
 #include <assert.h>
 #include <stdlib.h>
+#include <string.h>
 
 static ull _FileSort_GetMaxDigitLen()
 {
@@ -635,10 +636,34 @@ void MergeSortedFiles(const char **partFilePaths, ull partFileCount, String outp
         // 最后一轮，可能文件数不足k个
         fileCountOnce = remainingFiles - round * k;
       }
-      // 文件系统对象数组
-      FileSystem *fss = malloc(sizeof(FileSystem) * fileCountOnce);
       // 计算数组偏移
       ull partFilePathInArrayOffset = round * k;
+
+      if (fileCountOnce == 1) // 归并路数 == 1
+      { // 保留原来的文件路径作为输出路径，虽然没有参与归并，但是要保证下一轮能够读取到该文件
+        // 先释放之前的内存
+        if (round != partFilePathInArrayOffset) // 防止释放掉需要的文件路径
+        {
+          // 只有替换和被替换的文件路径不在数组的同一个位置才执行内存释放和元素替换
+          free(arrApi->get(newPartFilePaths, round));
+          char *partFilePath = arrApi->get(newPartFilePaths, partFilePathInArrayOffset);
+          // 拷贝一份，否则会出现free多次导致报错
+          ull nLen = strlen(partFilePath);
+          char *nextLayerPath = malloc(sizeof(char) * (nLen + 1));
+          memcpy(nextLayerPath, partFilePath, sizeof(char) * nLen);
+          nextLayerPath[nLen] = 0; // 结尾空字符
+          arrApi->replace(newPartFilePaths, round, nextLayerPath);
+        }
+        // 统计数据不能忘记，但未处理无法统计数据
+        // statisticsLayerElemCount += ;
+        // statisticsElemCount += ;
+        // 打印一些信息，提醒跳过处理
+        printf("当前归并只有一个文件参与，跳过处理，保留原文件用于下次归并处理: %s\n", arrApi->get(newPartFilePaths, round));
+        continue; // 直接跳过归并环节
+      }
+
+      // 文件系统对象数组
+      FileSystem *fss = malloc(sizeof(FileSystem) * fileCountOnce);
       // 创建文件系统对象并打开文件
       for (ull i = 0; i < fileCountOnce; i++)
       {
@@ -651,9 +676,9 @@ void MergeSortedFiles(const char **partFilePaths, ull partFileCount, String outp
         fss[i] = FileSystem_Create(partFilePath, "r");
       }
       // 进行K路归并排序
-      String tempFilePath = NULL;
+      String tempFilePath = NULL; // 作为归并的输出文件
       // 文件序号
-      if (!isLastRound)
+      if (!isLastRound) // 不是最后一轮归并
       {
         tempFilePath = strApi->copy(_tempFilePathPrefix);
         ull tempFileIndex = round;
@@ -681,7 +706,12 @@ void MergeSortedFiles(const char **partFilePaths, ull partFileCount, String outp
         .count = 0,
         .totalWritten = 0
       };
-      _FileSort_Merge_KWayMerge_FileSystem(fss, fileCountOnce, bufferSize, cmp, _FileSort_Merge_KWayMerge_Callback_Impl, &callbackData);
+      if (fileCountOnce > 1)
+        _FileSort_Merge_KWayMerge_FileSystem(fss, fileCountOnce, bufferSize, cmp, _FileSort_Merge_KWayMerge_Callback_Impl, &callbackData);
+      else
+      {
+        // 如果是单独的文件，则不需要k路归并，直接保留原文件
+      }
       // 如果缓冲区还有数据，写入文件
       if (callbackData.count > 0)
       {
@@ -690,8 +720,6 @@ void MergeSortedFiles(const char **partFilePaths, ull partFileCount, String outp
       }
       // 统计数据
       statisticsLayerElemCount += callbackData.totalWritten;
-      if (remainingFiles == partFileCount)
-        statisticsElemCount += callbackData.totalWritten;
       for (ull i = 0; i < fileCountOnce; i++)
       {
         fsApi->close(fss[i]);
@@ -702,6 +730,7 @@ void MergeSortedFiles(const char **partFilePaths, ull partFileCount, String outp
       fsApi->destroy(outputFile);
     }
     printf("归并层完成，处理元素总数: %llu 个。\n", statisticsLayerElemCount);
+    statisticsElemCount = statisticsLayerElemCount;
   }
   // 打印统计数据
   printf("共处理元素 %llu 个。\n", statisticsElemCount);

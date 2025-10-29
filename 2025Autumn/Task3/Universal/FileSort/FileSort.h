@@ -27,7 +27,7 @@ extern "C"
    * @param outputFilePath 合并后大文件的路径
    * @param tempFileFolder 临时文件夹路径
    * @param availableMemory 可用内存大小（字节）
-   * @param bufferSize 分块缓冲区大小（字节），一般取每个小文件大小
+   * @param bufferSize 分块缓冲区大小（字节），每次读写的块大小（字节），一般取磁盘块或自定义的缓冲区页大小
    * @param cmp 比较器函数
    */
   void MergeSortedFiles(const char** partFilePaths, ull partFileCount, String outputFilePath, String tempFileFolder, ull availableMemory, ull bufferSize, ConstComparator cmp);

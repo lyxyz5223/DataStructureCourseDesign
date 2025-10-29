@@ -230,7 +230,7 @@
                 "-fdiagnostics-color=always",
                 "-g",
                 // "-I${fileDirname}/Universal",
-                "-D_DEBUG", // 定义预处理器宏
+                // "-D_DEBUG", // 定义预处理器宏
                 "${fileDirname}/Universal/Array/Array.c",
                 "${fileDirname}/Universal/Linklist/Linklist.c",
                 "${fileDirname}/Universal/Set/Set.c",
