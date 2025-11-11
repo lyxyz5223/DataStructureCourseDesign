@@ -29,7 +29,7 @@ int universalDataStrcmp(const UniversalData* a, const UniversalData* b)
 void testSet()
 {
   Set *set = Set_Create(0, 0, universalDataStrcmp);
-  printf("Set is empty: %s\n", set->functions->empty(set) ? "true" : "false");
+  printf("Set is empty: %s\n", set->functions->isEmpty(set) ? "true" : "false");
   set->functions->add(set, "HUST");
   set->functions->add(set, "Hello, world!");
   set->functions->add(set, "Huazhong University of Science and Technology");
@@ -37,17 +37,17 @@ void testSet()
   set->functions->add(set, "Huazhong University of Science and Technology");
   set->functions->add(set, "Hello, world!");
   set->functions->add(set, "Huazhong University");
-  printf("Set is empty: %s\n", set->functions->empty(set) ? "true" : "false");
+  printf("Set is empty: %s\n", set->functions->isEmpty(set) ? "true" : "false");
   printf("Set length: %llu\n", set->functions->length(set));
   printSet(set);
   set->functions->remove(set, "Hello, world!");
   printf("[After remove \"Hello, world!\"]:\n");
-  printf("Set is empty: %s\n", set->functions->empty(set) ? "true" : "false");
+  printf("Set is empty: %s\n", set->functions->isEmpty(set) ? "true" : "false");
   printf("Set length: %llu\n", set->functions->length(set));
   printSet(set);
   set->functions->clear(set);
   printf("[After clear]:\n");
-  printf("Set is empty: %s\n", set->functions->empty(set) ? "true" : "false");
+  printf("Set is empty: %s\n", set->functions->isEmpty(set) ? "true" : "false");
   printf("Set length: %llu\n", set->functions->length(set));
   printSet(set);
 

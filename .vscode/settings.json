@@ -128,7 +128,8 @@
         "filesplitting.h": "c",
         "filesort.h": "c",
         "losertree.h": "c",
-        "limits.h": "c"
+        "limits.h": "c",
+        "linkliststack.h": "c"
     },
     "C_Cpp.default.compilerPath": "cl.exe"
 }

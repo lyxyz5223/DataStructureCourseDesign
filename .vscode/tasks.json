@@ -260,7 +260,94 @@
             ],
             "group": "build",
             "detail": "编译器: D:/Softwares/mingw64/bin/gcc.exe"
+        },
+        {
+            "type": "cppbuild",
+            "label": "All",
+            "command": "D:/Softwares/mingw64/bin/gcc.exe",
+            "args": [
+                "-std=c11", // C语言标准
+                "-static",
+                "-fdiagnostics-color=always",
+                "-g", // 表示Debug版本，包含调试符号
+                // "-I${fileDirname}/Universal",
+                // "-D_DEBUG", // 定义预处理器宏
+                "${fileDirname}/Universal/Array/Array.c",
+                "${fileDirname}/Universal/Linklist/Linklist.c",
+                "${fileDirname}/Universal/Set/Set.c",
+                "${fileDirname}/Universal/Set/ArraySet.c",
+                "${fileDirname}/Universal/Set/LinklistSet.c",
+                "${fileDirname}/Universal/String/CharArray.c",
+                "${fileDirname}/Universal/String/String.c",
+                "${fileDirname}/Universal/FileSystem/FileSystem.c",
+                "${fileDirname}/Universal/FileSplitting/FileSplitting.c",
+                "${fileDirname}/Universal/Queue/Queue.c",
+                "${fileDirname}/Universal/ThreadPool/ThreadPool.c",
+                "${fileDirname}/Universal/MemoryMap/MemoryMap.c",
+                "${fileDirname}/Universal/FileSort/FileSort.c",
+                "${fileDirname}/Universal/LoserTree/LoserTree.c",
+                "${fileDirname}/Universal/Stack/Stack.c",
+                "${fileDirname}/Universal/Stack/LinklistStack.c",
+                "${fileDirname}/Universal/Recursion/Recursion.c",
+                "${file}",
+                "-o",
+                "${fileDirname}\\Debug\\${fileBasenameNoExtension}.exe",
+                "-pthread", // 链接pthread库
+                // "-fexec-charset=GBK",
+                // "-finput-charset=UTF-8"
+            ],
+            "options": {
+                "cwd": "D:/Softwares/mingw64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "编译器: D:/Softwares/mingw64/bin/gcc.exe"
+        },
+        {
+            "type": "cppbuild",
+            "label": "All - C++",
+            "command": "D:/Softwares/mingw64/bin/g++.exe",
+            "args": [
+                "-std=c++17", // C语言标准
+                "-static",
+                "-fdiagnostics-color=always",
+                "-g", // 表示Debug版本，包含调试符号
+                // "-I${fileDirname}/Universal",
+                // "-D_DEBUG", // 定义预处理器宏
+                "${fileDirname}/Universal/Array/Array.c",
+                "${fileDirname}/Universal/Linklist/Linklist.c",
+                "${fileDirname}/Universal/Set/Set.c",
+                "${fileDirname}/Universal/Set/ArraySet.c",
+                "${fileDirname}/Universal/Set/LinklistSet.c",
+                "${fileDirname}/Universal/String/CharArray.c",
+                "${fileDirname}/Universal/String/String.c",
+                "${fileDirname}/Universal/FileSystem/FileSystem.c",
+                "${fileDirname}/Universal/FileSplitting/FileSplitting.c",
+                "${fileDirname}/Universal/Queue/Queue.c",
+                "${fileDirname}/Universal/ThreadPool/ThreadPool.c",
+                "${fileDirname}/Universal/MemoryMap/MemoryMap.c",
+                "${fileDirname}/Universal/FileSort/FileSort.c",
+                "${fileDirname}/Universal/LoserTree/LoserTree.c",
+                "${fileDirname}/Universal/Stack/Stack.c",
+                "${fileDirname}/Universal/Stack/LinklistStack.c",
+                "${fileDirname}/Universal/Recursion/Recursion.c",
+                "${file}",
+                "-o",
+                "${fileDirname}\\Debug\\${fileBasenameNoExtension}.exe",
+                "-pthread", // 链接pthread库
+                // "-fexec-charset=GBK",
+                // "-finput-charset=UTF-8"
+            ],
+            "options": {
+                "cwd": "D:/Softwares/mingw64/bin"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": "build",
+            "detail": "编译器: D:/Softwares/mingw64/bin/g++.exe"
         }
-
     ]
 }
